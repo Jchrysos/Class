@@ -1,0 +1,59 @@
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+
+using namespace std;
+
+int main()
+{
+  bool restart = false; //game will replay as long as restart = true
+
+  do{
+
+  /* Set random seed with srand() and then chooses random integer mod 101*/
+
+  srand(time(NULL));
+  int Goalnum = rand()%101;
+  cout << "Guess an integer from 0 to 100: ";
+  int Guess;
+  int Tries = 0;
+  bool isWin = false;
+  while (isWin == false){
+    Tries++; //number of tries will increment with each guess loop
+    cin >> Guess;
+    if (Guess > Goalnum){
+      cout << "Too high! Guess again: ";
+    }
+    else if (Guess < Goalnum){
+      cout << "Too low! Guess again: ";
+    }
+    else if (Guess == Goalnum){
+      isWin = true;
+      cout << "You win! The number was " << Goalnum << " and it took you " << Tries << " guesses. ";
+    }
+  }
+  if (Tries > 7){
+    cout << "You can do better than that!";
+  }
+  else if (Tries < 8 && Tries > 4){
+    cout << "Nice job!";
+  }
+  else if (Tries < 5 && Tries >2){
+    cout << "You just got lucky!";
+  }
+  else if (Tries < 3){
+    cout << "I think you cheated!";
+  }
+  cout << endl << "Want to play again? (Y/N): ";
+  string isRestart;
+  cin >> isRestart;
+  if (isRestart=="Y"){
+    restart = true;
+  }
+  else{
+    restart = false;
+  }
+  }while(restart);
+  return 0;
+}
